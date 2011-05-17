@@ -1,39 +1,39 @@
 Wordpress Template Framework
 ============================
 
-�قڎ�����p�ɍ���Ă���WordPress�����̃e���v���[�g�t���[�����[�N�B
-fork/pull-request�劽�}�B
-�ʏ�functions.php�ɋL�q����悤�ȃJ�X�^�����j���[��E�B�W�F�b�g�̈�A�V���[�g�R�[�h�A�J�X�^���^�N�\�m�~�[�A�J�X�^�����e�^�C�v�Ȃǂ��N���X�ɂă��W���[�������A���j���[�̎w��ɂ���ēǂݍ��ݐ�����s�����Ƃ��ł���悤�ɂȂ�B
+ほぼ自分専用に作っているWordPress向けのテンプレートフレームワーク。
+fork/pull-request大歓迎。
+通常functions.phpに記述するようなカスタムメニューやウィジェット領域、ショートコード、カスタムタクソノミー、カスタム投稿タイプなどをクラスにてモジュール化し、メニューの指定によって読み込み制御を行うことができるようになる。
 
-���C�Z���X
+ライセンス
 ----------
-�ꉞApache���C�Z���X�B�\�[�X���Ƃ��ɂ͂܂������ĂȂ��B
+一応Apacheライセンス。ソース中とかにはまだ書いてない。
 
-�g�p���@
+使用方法
 --------
-### �蓮�œ����
-* �����̃e���v���[�g�f�B���N�g����vendor�f�B���N�g�����쐬�B(libs�Ƃ��ł�OK�j
-* ���̒���WTF���C���X�g�[������B
-* functions.php�ɌĂяo���R�[�h�������B
+### 手動で入れる
+* 自分のテンプレートディレクトリにvendorディレクトリを作成。(libsとかでもOK）
+* その中にWTFをインストールする。
+* functions.phpに呼び出しコードを書く。
 
-### git���g��
-* �e���v���[�g�f�B���N�g���ŉ��L�R�}���h�����s
+### gitを使う
+* テンプレートディレクトリで下記コマンドを実行
     git checkout git://github.com/ariela/wtf.git vendor
 
-�Ή����W���[��
+対応モジュール
 --------------
 
-### �J�X�^�����j���[
-Wtf/Menu�ȉ��ɃN���X���쐬����B
+### カスタムメニュー
+Wtf/Menu以下にクラスを作成する。
 
-### �V���[�g�R�[�h
-Wtf/ShortCode�ȉ��ɃN���X���쐬����B
+### ショートコード
+Wtf/ShortCode以下にクラスを作成する。
 
-### �J�X�^���^�N�\�m�~�[
-Wtf/Taxonomy�ȉ��ɃN���X���쐬����B
+### カスタムタクソノミー
+Wtf/Taxonomy以下にクラスを作成する。
 
-### �J�X�^�����e�^�C�v
-Wtf/Type�ȉ��ɃN���X���쐬����B
+### カスタム投稿タイプ
+Wtf/Type以下にクラスを作成する。
 
-### �E�B�W�F�b�g�̈�
-Wtf/WidgetArea�ȉ��ɃN���X���쐬����B
+### ウィジェット領域
+Wtf/WidgetArea以下にクラスを作成する。
