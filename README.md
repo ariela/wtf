@@ -18,7 +18,8 @@ fork/pull-request大歓迎。
 
 ### gitを使う
 * テンプレートディレクトリで下記コマンドを実行
-    git checkout git://github.com/ariela/wtf.git vendor
+
+    git clone git://github.com/ariela/wtf.git vendor
 
 対応モジュール
 --------------
