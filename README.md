@@ -3,23 +3,32 @@ Wordpress Template Framework
 
 ほぼ自分専用に作っているWordPress向けのテンプレートフレームワーク。
 fork/pull-request大歓迎。
-通常functions.phpに記述するようなカスタムメニューやウィジェット領域、ショートコード、カスタムタクソノミー、カスタム投稿タイプなどをクラスにてモジュール化し、メニューの指定によって読み込み制御を行うことができるようになる。
+
+通常functions.phpに記述するようなカスタムメニューやウィジェット領域などをクラスにてモジュール化し、
+メニューの指定によって読み込み制御を行うことができるようになる。
 
 ライセンス
 ----------
-一応Apacheライセンス。ソース中とかにはまだ書いてない。
+[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 使用方法
 --------
 ### 手動で入れる
 * 自分のテンプレートディレクトリにvendorディレクトリを作成。(libsとかでもOK）
 * その中にWTFをインストールする。
-* functions.phpに呼び出しコードを書く。
 
 ### gitを使う
 * テンプレートディレクトリで下記コマンドを実行
 
     git clone git://github.com/ariela/wtf.git vendor
+
+### 共通
+* functions.phpに呼び出しコードを記述する。
+
+    require_once dirname(__FILE__) . '/vendor/Wtf.php';
+    $wpt = Wtf::getInstance();
+
+* テーマのメニューに「WTF設定」が追加されるので、使いたいモジュールを選択する。
 
 対応モジュール
 --------------
@@ -38,3 +47,6 @@ Wtf/Type以下にクラスを作成する。
 
 ### ウィジェット領域
 Wtf/WidgetArea以下にクラスを作成する。
+
+### フィルター
+Wtf/Filter以下にクラスを作成する。
