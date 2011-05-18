@@ -32,13 +32,7 @@ final class Wtf
         spl_autoload_register(array($this, 'classFileLoader'));
 
         $this->initializeTheme();
-
-        include dirname(__FILE__) . '/Wtf/Config/support.php';
-        foreach ($support as $k => $v) {
-            if ($v) {
-                $this->loadModule($k, $v[1]);
-            }
-        }
+        $this->loadModule();
     }
 
     /**
@@ -112,29 +106,20 @@ final class Wtf
 
     /**
      * モジュールを読み込む
-     * @param string $type モジュールタイプ
      */
-    private function loadModule($opt, $type)
+    private function loadModule()
     {
-        $optkey = 'wtf_' . $opt . '_';
-        $type = ucfirst($type);
-
-        // enable
-        $optenb = $optkey . 'enabled';
-        $optenb = get_option($optenb, '0');
-
-        if ($optenb === '1') {
-
-            $path = dirname(__FILE__) . '/Wtf/' . $type . '/*.php';
-            $list = glob($path);
-            foreach ($list as $file) {
-                $optmod = $optkey . basename($file, '.php');
-                $optmod = get_option($optmod, '0');
-
-                if ($optmod === '1') {
-                    $classname = 'Wtf_' . $type . '_' . basename($file, '.php');
-                    $module = new $classname();
-                    $module->register();
+        include dirname(__FILE__) . '/Wtf/Config/support.php';
+        $modules = unserialize(get_option('wtf_modules'));
+        foreach ($support as $short => $value) {
+            $optkey = 'wtf_' . $short . '_';
+            $long = $value[1];
+            $module = $modules[$long];
+            $enable = get_option($optkey . 'enabled', 0);
+            if ($enable === '1' && !is_null($module)) {
+                foreach ($module as $classname) {
+                    $md = new $classname();
+                    $md->register();
                 }
             }
         }
