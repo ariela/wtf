@@ -25,7 +25,7 @@ fork/pull-request大歓迎。
 ### 共通
 * functions.phpに呼び出しコードを記述する。
 
-    require_once dirname(__FILE__) . '/vendor/Wtf.php';
+    require_once dirname(\_\_FILE\_\_) . '/vendor/Wtf.php';
     $wpt = Wtf::getInstance();
 
 * テーマのメニューに「WTF設定」が追加されるので、使いたいモジュールを選択する。

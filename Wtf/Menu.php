@@ -1,5 +1,9 @@
 <?php
 /**
+ * カスタムメニューモジュールを定義する為の抽象クラス
+ *
+ * License:
+ * 
  * Copyright 2011 Takeshi Kawamoto
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +17,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * @author  Takeshi Kawamoto <yuki@transrain.net>
+ * @version $Id:$
+ * @since   1.0.0
  */
 abstract class Wtf_Menu implements Wtf_IModule
 {

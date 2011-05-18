@@ -1,5 +1,9 @@
 <?php
 /**
+ * WordPress テーマ開発用フレームワーク 起動クラス
+ *
+ * License:
+ * 
  * Copyright 2011 Takeshi Kawamoto
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,17 +17,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
-/**
- * WordPress テーマ開発用フレームワーク
  * 
- * @author    Takeshi Kawamoto
- * @category  WordPress
- * @package   Wtf
- * @copyright Copyright (c) Takeshi Kawamoto <yuki@transrain.net>
- * @license   Apache License, Version 2.0 <http://www.apache.org/licenses/LICENSE-2.0>
+ * @author  Takeshi Kawamoto <yuki@transrain.net>
+ * @version $Id:$
+ * @since   1.0.0
  */
-final class Wtf
+class Wtf
 {
     /**
      * 自身のインスタンスを保持する
@@ -119,13 +118,18 @@ final class Wtf
      */
     private function loadModule()
     {
+        // モジュール情報を取得する
         include dirname(__FILE__) . '/Wtf/Config/support.php';
         $modules = unserialize(get_option('wtf_modules'));
+
         foreach ($support as $short => $value) {
+            // モジュール情報を構築する
             $optkey = 'wtf_' . $short . '_';
             $long = $value[1];
             $module = $modules[$long];
             $enable = get_option($optkey . 'enabled', 0);
+
+            // モジュールが有効な場合は読み込みを行う
             if ($enable === '1' && !is_null($module)) {
                 foreach ($module as $classname) {
                     $md = new $classname();
