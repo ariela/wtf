@@ -9,4 +9,9 @@ class Wtf_Taxonomy_Books extends Wtf_Taxonomy
     protected $m_singular_label = '本のカテゴリ';
     protected $m_public = true;
     protected $m_show_ui = true;
+
+    public static function description()
+    {
+        return '本に関するカスタムタクソノミーを追加します。';
+    }
 }

@@ -25,4 +25,11 @@ abstract class Wtf_WidgetArea implements Wtf_IModule
         );
         register_sidebar($widget);
     }
+
+    public static function description()
+    {
+        $c = get_called_class();
+        $d = new $c;
+        return $d->m_description;
+    }
 }

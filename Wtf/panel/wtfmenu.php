@@ -70,7 +70,7 @@ if (!empty($_POST)) {
 <?php if (isset($_GET['m'])) { ?>
     <div id="setting-error-settings_updated" class="updated settings-error"><p>
             <strong>設定を更新しました。</strong>
-    </p></div>
+        </p></div>
 <?php } ?>
 
 <form method="post" action=""> 
@@ -129,13 +129,23 @@ function wtfmenu_displayStack($title, $slug, $type)
         // オプション
         $t = 'wtf_' . $slug . '_' . $line;
         $$t = get_option($t, '0');
+
         $buf[] = '      <label>';
         if ($$t === '1') {
             $buf[] = '        <input id="' . $t . '" name="' . $t . '" type="checkbox" value="1" checked="checked">';
         } else {
             $buf[] = '        <input id="' . $t . '" name="' . $t . '" type="checkbox" value="1">';
         }
+
+
         $buf[] = '        ' . $line;
+
+        $class = 'Wtf_' . $type . '_' . $line;
+        $descript = call_user_func(array($class, 'description'));
+        if (!empty($descript)) {
+            $buf[] = '&nbsp;<span class="description">' . $descript . '</span>';
+        }
+
         $buf[] = '      </label><br>';
     }
     $buf[] = '    </td>';

@@ -20,4 +20,9 @@ class Wtf_Type_Books extends Wtf_Type
         , 'revisions'
         , 'page-attributes'
     );
+
+    public static function description()
+    {
+        return '本に関するカスタム投稿タイプを追加します。';
+    }
 }

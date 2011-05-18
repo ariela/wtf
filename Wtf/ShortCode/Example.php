@@ -15,4 +15,9 @@ class Wtf_ShortCode_Example extends Wtf_ShortCode
         $fuga = isset($attrs['fuga']) ? $attrs['fuga'] : 'none';
         return "{$hoge} & {$fuga}";
     }
+
+    public static function description()
+    {
+        return 'ショートコードのサンプルです。';
+    }
 }
