@@ -1,5 +1,9 @@
 <?php
 /**
+ * ショートコードを追加するフィルターモジュールのサンプル
+ *
+ * License:
+ * 
  * Copyright 2011 Takeshi Kawamoto
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,26 +17,47 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * @author   Takeshi Kawamoto <yuki@transrain.net>
+ * @version  $Id:$
+ * @since    1.0.0
  */
 class Wtf_ShortCode_Example extends Wtf_ShortCode
 {
+    /**
+     * {@inheritDoc}
+     */
     protected $m_id = 'example';
+    /**
+     * {@inheritDoc}
+     */
     protected $m_callback;
 
+    /**
+     * {@inheritDoc}
+     */
+    public static function description()
+    {
+        return 'ショートコードのサンプルです。';
+    }
+
+    /**
+     * クラスの初期化処理（コールバックの設定）
+     */
     public function __construct()
     {
         $this->m_callback = array($this, 'callback');
     }
 
+    /**
+     * コールバック関数
+     * @param array $attrs ショートコードで指定された引数
+     * @return string 出力する文字列
+     */
     public function callback($attrs)
     {
         $hoge = isset($attrs['hoge']) ? $attrs['hoge'] : 'none';
         $fuga = isset($attrs['fuga']) ? $attrs['fuga'] : 'none';
         return "{$hoge} & {$fuga}";
-    }
-
-    public static function description()
-    {
-        return 'ショートコードのサンプルです。';
     }
 }

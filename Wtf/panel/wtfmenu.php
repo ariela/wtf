@@ -1,5 +1,9 @@
 <?php
 /**
+ * WTFの管理画面
+ *
+ * License:
+ * 
  * Copyright 2011 Takeshi Kawamoto
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +17,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * @author   Takeshi Kawamoto <yuki@transrain.net>
+ * @version  $Id:$
+ * @since    1.0.0
  */
-
 // このファイルのURLを作成
 $url = 'http';
 if (isset($_SERVER['HTTPS'])) $url .= 's';
@@ -92,13 +99,6 @@ if (!empty($_POST)) {
 <form method="post" action=""> 
     <input type='hidden' name='option_page' value='general' />
     <input type="hidden" name="action" value="update" />
-
-
-    <!--
-    <input type="hidden" id="_wpnonce" name="_wpnonce" value="ed582380d2" />
-    <input type="hidden" name="_wp_http_referer" value="/tr/wordpress/wp-admin/options-general.php" /> 
-    -->
-
     <?php
     wp_nonce_field($url);
     foreach ($support as $k => $v) {

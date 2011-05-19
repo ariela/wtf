@@ -11,6 +11,11 @@ fork/pull-request大歓迎。
 ----------
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
+利用可能環境
+------------
+* PHP5.2以上(テストは5.3以上)
+* Wordpress 3.0以上(テストは3.2以上)
+
 使用方法
 --------
 ### 手動で入れる

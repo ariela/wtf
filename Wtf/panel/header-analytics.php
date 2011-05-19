@@ -1,5 +1,9 @@
 <?php
 /**
+ * ヘッダモジュール「Analytics」の管理画面
+ *
+ * License:
+ * 
  * Copyright 2011 Takeshi Kawamoto
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,17 +17,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
-/*
-  // このファイルのURLを作成
-  $url = 'http';
-  if (isset($_SERVER['HTTPS'])) $url .= 's';
-  $url.= '://' . $_SERVER['SERVER_NAME'];
-  if (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] !== '80') {
-  $url.=':' . $_SERVER['SERVER_PORT'];
-  }
-  $url.=$_SERVER['SCRIPT_NAME'];
-  if (isset($_SERVER['QUERY_STRING'])) $url.= '?' . $_SERVER['QUERY_STRING'];
+ * 
+ * @author   Takeshi Kawamoto <yuki@transrain.net>
+ * @version  $Id:$
+ * @since    1.0.0
  */
 // 更新があった場合
 if (!empty($_POST)) {

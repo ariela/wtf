@@ -1,5 +1,9 @@
 <?php
 /**
+ * ウィジェット領域にfirst領域を追加するウィジェット領域モジュール
+ *
+ * License:
+ * 
  * Copyright 2011 Takeshi Kawamoto
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +17,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * @author   Takeshi Kawamoto <yuki@transrain.net>
+ * @version  $Id:$
+ * @since    1.0.0
  */
-class Wtf_WidgetArea_First extends Wtf_WidgetArea
+class Wtf_WidgetArea_FooterFirst extends Wtf_WidgetArea
 {
+    /**
+     * {@inheritDoc}
+     */
     protected $m_id = 'first';
+    /**
+     * {@inheritDoc}
+     */
     protected $m_name = 'フッタ領域（左）';
+    /**
+     * {@inheritDoc}
+     */
     protected $m_description = 'フッタに設定されるウィジェット領域。左に表示される。';
 
 

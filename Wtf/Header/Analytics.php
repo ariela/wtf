@@ -1,5 +1,9 @@
 <?php
 /**
+ * Google Analyticsのメタ情報を追加するフィルターモジュール
+ *
+ * License:
+ * 
  * Copyright 2011 Takeshi Kawamoto
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,26 +17,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
-/**
- * オープングラフのメタ情報を追加するフィルターモジュール
  * 
- * @author    Takeshi Kawamoto
- * @category  WordPress
- * @package   Wtf_Filter
- * @copyright Copyright (c) Takeshi Kawamoto <yuki@transrain.net>
- * @license   Apache License, Version 2.0 <http://www.apache.org/licenses/LICENSE-2.0>
+ * @author   Takeshi Kawamoto <yuki@transrain.net>
+ * @version  $Id:$
+ * @since    1.0.0
  */
 class Wtf_Header_Analytics extends Wtf_Header
 {
     /**
      * {@inheritDoc}
-     * @overrides
      */
     protected $m_priority = 10;
     /**
      * {@inheritDoc}
-     * @overrides
      */
     protected $m_accepted_args = 0;
 
@@ -54,8 +51,6 @@ class Wtf_Header_Analytics extends Wtf_Header
 
     /**
      * コールバック関数
-     * @param array $contact コンタクト情報項目が設定された配列
-     * @return array コンタクト情報項目配列
      */
     public function callback()
     {
@@ -77,12 +72,19 @@ class Wtf_Header_Analytics extends Wtf_Header
         echo implode("\n", $buf) . "\n    ";
     }
 
+    /**
+     * 管理パネルを登録する
+     */
     public function registerMenu()
     {
         add_submenu_page('wtf.php', 'Analytics', 'Analytics', 8, 'header-analytics',
                 array($this, 'displayPanel'));
     }
 
+    /**
+     * 管理パネルを表示する
+     * @see ../panel/header-analytics.php
+     */
     public function displayPanel()
     {
         require_once dirname(dirname(__FILE__)) . '/panel/header-analytics.php';

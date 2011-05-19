@@ -1,5 +1,9 @@
 <?php
 /**
+ * ウィジェットを追加するウィジェットモジュールのサンプル
+ *
+ * License:
+ * 
  * Copyright 2011 Takeshi Kawamoto
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +17,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * @author   Takeshi Kawamoto <yuki@transrain.net>
+ * @version  $Id:$
+ * @since    1.0.0
  */
 class Wtf_Widget_Example extends Wtf_Widget
 {
@@ -46,6 +54,9 @@ class Wtf_Widget_Example extends Wtf_Widget
         <?php
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public static function description()
     {
         return 'ウィジェットのサンプルです。';
