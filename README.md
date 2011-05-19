@@ -28,25 +28,70 @@ fork/pull-request大歓迎。
     require_once dirname(\_\_FILE\_\_) . '/vendor/Wtf.php';
     $wpt = Wtf::getInstance();
 
-* テーマのメニューに「WTF設定」が追加されるので、使いたいモジュールを選択する。
+* 管理メニューに「WTF設定」が追加されるので、使いたいモジュールを選択する。
+* 管理メニューのサブパネルの設定を行う。
 
 対応モジュール
 --------------
 
-### カスタムメニュー
+### ヘッダ ###
+wp_headで呼び出されるヘッダコードを追加する為のモジュール。
+
+Wtf/Header以下にクラスを生成する。
+
+#### クラスの作成方法
+[例:OpenGraph ヘッダモジュール](https://github.com/ariela/wtf/blob/master/Wtf/Header/OpenGraph.php)
+
+### カスタムメニュー ###
+カスタムメニューの領域を追加する為のモジュール
+
 Wtf/Menu以下にクラスを作成する。
 
-### ショートコード
+#### クラスの作成方法
+[例:Global メニュー領域モジュール](https://github.com/ariela/wtf/blob/master/Wtf/Menu/Global.php)
+
+### ショートコード ###
+投稿時に使用できるショートコードを追加する為のモジュール
+
 Wtf/ShortCode以下にクラスを作成する。
 
-### カスタムタクソノミー
+#### クラスの作成方法
+[例:Example ショートコードモジュール](https://github.com/ariela/wtf/blob/master/Wtf/ShortCode/Example.php)
+
+### カスタムタクソノミー ###
+カスタムタクソノミーを追加する為のモジュール
+
 Wtf/Taxonomy以下にクラスを作成する。
 
-### カスタム投稿タイプ
+#### クラスの作成方法
+[例:Books カスタムタクソノミーモジュール](https://github.com/ariela/wtf/blob/master/Wtf/Taxonomy/Books.php)
+
+### カスタム投稿タイプ ###
+カスタム投稿タイプを追加する為のモジュール
+
 Wtf/Type以下にクラスを作成する。
 
-### ウィジェット領域
+#### クラスの作成方法
+[例:Books カスタム投稿タイプモジュール](https://github.com/ariela/wtf/blob/master/Wtf/Type/Books.php)
+
+### ウィジェット領域 ###
+ウィジェット領域を追加する為のモジュール
+
 Wtf/WidgetArea以下にクラスを作成する。
 
-### フィルター
+#### クラスの作成方法
+[例:First ウィジェット領域モジュール](https://github.com/ariela/wtf/blob/master/Wtf/WidgetArea/First.php)
+
+### ウィジェット ###
+ウィジェットを追加する為のモジュール
+
+#### クラスの作成方法
+[例:Example ウィジェットモジュール](https://github.com/ariela/wtf/blob/master/Wtf/Widget/Example.php)
+
+### フィルター ###
+WordPressのフィルターに追加する為のモジュール
+
 Wtf/Filter以下にクラスを作成する。
+
+#### クラスの作成方法
+[例:AppendContact フィルターモジュール](https://github.com/ariela/wtf/blob/master/Wtf/Filter/AppendContact.php)
