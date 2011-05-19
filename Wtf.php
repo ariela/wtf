@@ -101,8 +101,7 @@ class Wtf
      */
     public function addWtfMenu()
     {
-        add_submenu_page('themes.php', 'WTF設定', 'WTF設定', 8, 'wtfconfig',
-                array($this, 'displayWtfMenu'));
+        add_menu_page('WTF設定', 'WTF設定', 8, 'wtf.php', array($this, 'displayWtfMenu'));
     }
 
     /**
