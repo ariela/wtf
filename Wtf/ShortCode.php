@@ -30,5 +30,8 @@ abstract class Wtf_ShortCode implements Wtf_IModule
     public function register()
     {
         add_shortcode($this->m_id, $this->m_callback);
+        if (method_exists($this, 'registerMenu')) {
+            add_action('admin_menu', array($this, 'registerMenu'));
+        }
     }
 }

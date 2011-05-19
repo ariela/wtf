@@ -111,5 +111,8 @@ abstract class Wtf_Type implements Wtf_IModule
         }
 
         register_post_type($this->m_type, $options);
+        if (method_exists($this, 'registerMenu')) {
+            add_action('admin_menu', array($this, 'registerMenu'));
+        }
     }
 }

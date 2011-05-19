@@ -52,5 +52,8 @@ abstract class Wtf_Filter implements Wtf_IModule
     public function register()
     {
         add_filter($this->m_tag, $this->m_callback, $this->m_priority, $this->m_accepted_args);
+        if (method_exists($this, 'registerMenu')) {
+            add_action('admin_menu', array($this, 'registerMenu'));
+        }
     }
 }
