@@ -85,6 +85,7 @@ class Wtf
         //add_custom_image_header();
         //add_custom_background();
         add_theme_support('post-thumbnails');
+        add_image_size('post-eyecatch', 300, 300, true);
         add_theme_support('menus');
         add_theme_support('automatic-feed-links');
 
