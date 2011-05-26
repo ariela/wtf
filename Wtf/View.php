@@ -22,18 +22,28 @@
  * <table>
  * <tr><th>{{ var }}</th><td>指定された変数を出力する(HTMLエンティティ化を行う)</td></tr>
  * <tr><th>{{ var|raw }}</th><td>指定された変数をそのまま出力する</td></tr>
- * <tr><th>{% each (val as ext) %}</th><td>foreachを行う。<br><code>foreach ($val as $ext) {</code></td></tr>
- * <tr><th>{% each (val in key,ext) %}</th><td>foreachを行う。<br><code>foreach ($val as $key=>$ext) {</code></td></tr>
+ * <tr><th>{% each (val as ext) %}</th><td>foreachを行う。<br>
+ * <code>foreach ($val as $ext) {</code></td></tr>
+ * <tr><th>{% each (val in key,ext) %}</th><td>foreachを行う。<br>
+ * <code>foreach ($val as $key=>$ext) {</code></td></tr>
  * <tr><th>{% if (val) %}～{% end %}</th><td>ifを行う。<br><code>if ($val) {</code></td></tr>
  * <tr><th>{% elseif (val) %}</th><td>elseifを行う。<br><code>} elseif ($val) {</code></td></tr>
  * <tr><th>{% else %}</th><td>elseを行う。<br><code>} else {</code></td></tr>
- * <tr><th>{% has(val) %}</th><td>変数が定義されているかを確認する。<br><code>if (isset($val)) {</code></td></tr>
- * <tr><th>{% !has(val) %}</th><td>変数が定義されていないかを確認する。<br><code>if (!isset($val)) {</code></td></tr>
- * <tr><th>{% empty(val) %}</th><td>変数が空かを確認する。<br><code>if (empty($val)) {</code></td></tr>
- * <tr><th>{% !empty(val) %}</th><td>変数が空ではないかを確認する。<br><code>if (empty($val)) {</code></td></tr>
+ * <tr><th>{% has(val) %}</th><td>変数が定義されているかを確認する。<br>
+ * <code>if (isset($val)) {</code></td></tr>
+ * <tr><th>{% !has(val) %}</th><td>変数が定義されていないかを確認する。<br>
+ * <code>if (!isset($val)) {</code></td></tr>
+ * <tr><th>{% empty(val) %}</th><td>変数が空かを確認する。<br>
+ * <code>if (empty($val)) {</code></td></tr>
+ * <tr><th>{% !empty(val) %}</th><td>変数が空ではないかを確認する。<br>
+ * <code>if (empty($val)) {</code></td></tr>
  * <tr><th>{% end %}</th><td>each if has emptyなどを閉じる。<br><code>}</code></td></tr>
  * <tr><th>{% PHPコード %}</th><td>PHPコードをそのまま発行する。</td></tr>
  * <tr><th>{# コメント #}</th><td>コメントを記述する。(出力に含まれない）</td></tr>
+ * <tr><th>{% assign(field,val) %}</th><td>$fieldにvalの内容を設定する。</td></tr>
+ * <tr><th>{% extends(template) %}</th><td>指定したテンプレートを継承する。</td></tr>
+ * <tr><th>{% block name %}～{% endblock name %}</th><td>継承ブロックを定義する。継承元と継承先で
+ * 同一nameで定義する事により、継承元のブロックを継承先のブロックで置き換える。</td></tr>
  * </table>
  * 
  * @author Takeshi Kawamoto <yuki@transrain.net>
@@ -205,9 +215,9 @@ class Wtf_View
 
         // 継承している場合は最後に継承元のテンプレートを呼び出す。
         if ($isExtend) {
-            $buffer .= "\n". $extends;
+            $buffer .= "\n" . $extends;
         }
-        
+
         return $buffer;
     }
 
