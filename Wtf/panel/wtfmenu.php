@@ -22,6 +22,10 @@
  * @version  $Id:$
  * @since    1.0.0
  */
+$view = new Wtf_View();
+$options = array();
+
+
 // このファイルのURLを作成
 $url = 'http';
 if (isset($_SERVER['HTTPS'])) $url .= 's';
@@ -31,20 +35,19 @@ if (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] !== '80') {
 }
 $url.=$_SERVER['SCRIPT_NAME'];
 if (isset($_SERVER['QUERY_STRING'])) $url.= '?' . $_SERVER['QUERY_STRING'];
+$options['url'] = $url;
 
 // モジュール情報を読み込み
 include dirname(dirname(__FILE__)) . '/Config/support.php';
+$options['support'] = $support;
 
 // 更新があった場合
 if (!empty($_POST)) {
-
     // nonce チェック
     $nonce = wp_create_nonce($url);
     if (!wp_verify_nonce($nonce, $url)) {
-        // nonceチェックでエラーが発生した場合         
-        echo '<div id="setting-error-settings_updated" class="updated settings-error">';
-        echo '<p><strong>リクエストが不正です。更新されませんでした。</strong></p>';
-        echo '</div>';
+        // nonceチェックでエラーが発生した場合
+        $options['message'] = 'リクエストが不正です。更新されませんでした。';
     } else {
         // 設定情報を登録する
         $opt = array();
@@ -85,33 +88,13 @@ if (!empty($_POST)) {
         exit('<script>location.href="' . $url . '&m=1";</script>');
     }
 }
-?>
-<div id="icon-themes" class="icon32"><br></div>
 
-<h2>Wordpress Theme Framework 設定</h2>
+// 更新メッセージ
+if (isset($_GET['m'])) {
+    $options['message'] = '設定を更新しました。';
+}
 
-<?php if (isset($_GET['m'])) { ?>
-    <div id="setting-error-settings_updated" class="updated settings-error"><p>
-            <strong>設定を更新しました。</strong>
-        </p></div>
-<?php } ?>
-
-<form method="post" action=""> 
-    <input type='hidden' name='option_page' value='general' />
-    <input type="hidden" name="action" value="update" />
-    <?php
-    wp_nonce_field($url);
-    foreach ($support as $k => $v) {
-        wtfmenu_displayStack($v[0], $k, $v[1]);
-    }
-    ?>
-</table>
-<p class="submit">
-    <input type="submit" name="submit" id="submit" class="button-primary" value="変更を保存">
-</p>
-</form>
-
-<?php
+$view->render('wtfmenu', $options);
 
 function wtfmenu_displayStack($title, $slug, $type)
 {

@@ -1,0 +1,15 @@
+{% assign(title,"Wordpress Theme Framework 設定") %}
+{% extends(panel) %}
+
+{% block contents %}
+    <input type='hidden' name='option_page' value='general' />
+    <input type="hidden" name="action" value="update" />
+    {% wp_nonce_field($url); %}
+    {% each(support as k,v) %}
+        {% wtfmenu_displayStack($v[0], $k, $v[1]); %}
+    {% end %}
+
+    <p class="submit">
+        <input type="submit" name="submit" id="submit" class="button-primary" value="変更を保存">
+    </p>
+{% endblock contents %}

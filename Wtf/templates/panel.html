@@ -1,0 +1,15 @@
+<div id="icon-themes" class="icon32"><br></div>
+
+<h2>{{ title }}</h2>
+
+{% has(message) %}
+<div id="setting-error-settings_updated" class="updated settings-error"><p>
+    <strong>{{ message }}</strong>
+</p></div>
+{% end %}
+
+<form method="post" action=""> 
+{% block contents %}
+コンテンツブロック
+{% endblock contents %}
+</form>
