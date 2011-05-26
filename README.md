@@ -28,6 +28,7 @@ fork/pull-request大歓迎。
     git clone git://github.com/ariela/wtf.git vendor
 
 ### 共通
+* vendor/Wtf/cachesに書き込み権限を与える。
 * functions.phpに呼び出しコードを記述する。
 
     require_once dirname(\_\_FILE\_\_) . '/vendor/Wtf.php';
@@ -91,7 +92,7 @@ Wtf/WidgetArea以下にクラスを作成する。
 ウィジェットを追加する為のモジュール
 
 #### クラスの作成方法
-[例:Example ウィジェットモジュール](https://github.com/ariela/wtf/blob/master/Wtf/Widget/Example.php)
+[例:AdSence ウィジェットモジュール](https://github.com/ariela/wtf/blob/master/Wtf/Widget/AdSence.php)
 
 ### フィルター ###
 WordPressのフィルターに追加する為のモジュール
