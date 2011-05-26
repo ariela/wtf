@@ -82,17 +82,6 @@ class Wtf
      */
     private function initializeTheme()
     {
-        //add_custom_image_header();
-        //add_custom_background();
-        add_theme_support('post-thumbnails');
-        add_image_size('post-eyecatch', 300, 300, true);
-        add_theme_support('menus');
-        add_theme_support('automatic-feed-links');
-
-        // 不要なヘッダを取り除く
-        remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
-        remove_action('wp_head', 'wp_generator');
-
         // Wtf管理ページの追加
         add_action('admin_menu', array($this, 'addWtfMenu'));
     }
