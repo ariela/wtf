@@ -184,22 +184,6 @@ class Wtf_View
             $blockEnd = "\n" . '<?php }}; block_$1($values); ?>';
         }
 
-        /*
-          $blockStart = 'if (!function_exists("block_$1")) {';
-          $blockStart .= 'function block_$1($values) { extract($values) ?>';
-          $blockEnd = '<?php }}';
-
-          $regexp = '/\{% extends\((\w+)\) %\}/s';
-          $extends = '<?php $v=new Wtf_View(); $v->render("$1", $values); ';
-          if (preg_match($regexp, $buffer)) { //継承の場合
-          $buffer = preg_replace($regexp, $extends, $buffer);
-          $blockEnd .= '?>';
-          } else {
-          $blockStart = '<?php ' . $blockStart;
-          $blockEnd .= '; block_$1($values) ?>';
-          }
-         */
-
         $reppattern = array(
             '/\{% block (\w+) %\}/' => $blockStart,
             '/\{% endblock (\w+) %\}/' => $blockEnd,
@@ -219,6 +203,7 @@ class Wtf_View
         );
         $buffer = preg_replace(array_keys($reppattern), array_values($reppattern), $buffer);
 
+        // 継承している場合は最後に継承元のテンプレートを呼び出す。
         if ($isExtend) {
             $buffer .= "\n". $extends;
         }
