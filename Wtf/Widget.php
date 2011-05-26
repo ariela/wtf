@@ -24,12 +24,14 @@
  */
 abstract class Wtf_Widget extends WP_Widget implements Wtf_IModule
 {
-    protected $m_title = 'title';
-
+    protected $m_name = 'title';
+    protected $m_widget_options = array();
+    protected $m_control_options = array();
+    
     public function __construct()
     {
         $c = get_class($this);
-        parent::__construct($c, $this->m_title);
+        parent::__construct($c, $this->m_name, $this->m_widget_options, $this->m_control_options);
     }
 
     public function initialize()
