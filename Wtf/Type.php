@@ -34,6 +34,7 @@ abstract class Wtf_Type implements Wtf_IModule
     protected $m_show_ui;
     protected $m_capability_type;
     protected $m_capabilities;
+    protected $m_has_archive;
     protected $m_hierarchical;
     protected $m_supports;
     protected $m_register_meta_box_cb;
@@ -75,6 +76,9 @@ abstract class Wtf_Type implements Wtf_IModule
         }
         if (!is_null($this->m_capabilities)) {
             $options['capabilities'] = $this->m_capabilities;
+        }
+        if (!is_null($this->m_has_archive)) {
+            $options['has_archive'] = $this->m_has_archive;
         }
         if (!is_null($this->m_hierarchical)) {
             $options['hierarchical'] = $this->m_hierarchical;
