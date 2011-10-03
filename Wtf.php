@@ -115,7 +115,12 @@ class Wtf
             // モジュール情報を構築する
             $optkey = 'wtf_' . $short . '_';
             $long = $value[1];
-            $module = $modules[$long];
+
+            if (isset($modules[$long])) {
+                $module = $modules[$long];
+            } else {
+                $module = array();
+            }
             $enable = get_option($optkey . 'enabled', 0);
 
             // モジュールが有効な場合は読み込みを行う
