@@ -78,9 +78,11 @@ class Wtf_Field_CircleSpace extends Wtf_Field
         }
         $name = $_POST[$this->m_key . '_name'];
         $space = $_POST[$this->m_key . '_space'];
+        $consignment = isset($_POST[$this->m_key . '_consignment']) ? $_POST[$this->m_key . '_consignment'] : '';
         
         update_post_meta($post->ID, $this->m_key . '_name', $name);
         update_post_meta($post->ID, $this->m_key . '_space', $space);
+        update_post_meta($post->ID, $this->m_key . '_consignment', $consignment);
     }
 
     /**
@@ -96,6 +98,7 @@ class Wtf_Field_CircleSpace extends Wtf_Field
         if( 'events' == $post_type ) {
             $columns[$this->m_key . '_name'] = 'サークル名';
             $columns[$this->m_key . '_space'] = 'スペース';
+            $columns[$this->m_key . '_consignment'] = '委託';
         }
         return $columns;
     }
@@ -106,6 +109,10 @@ class Wtf_Field_CircleSpace extends Wtf_Field
         }
         if( $column_name == $this->m_key . '_space' ) {
             echo get_post_meta($post_id, $this->m_key . '_space', true);
+        }
+        if( $column_name == $this->m_key . '_consignment' ) {
+            $v = get_post_meta($post_id, $this->m_key . '_consignment', true);
+            if ($v === '1') echo '✓';
         }
     }
 }

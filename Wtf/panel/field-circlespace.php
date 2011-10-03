@@ -29,6 +29,7 @@ $custom = get_post_custom($post->ID);
 if(!empty($custom[$this->m_key . '_name']) || !empty($custom[$this->m_key . '_space'])) {
     $name = $custom[$this->m_key . '_name'][0];
     $space = $custom[$this->m_key . '_space'][0];
+    if(!empty($custom[$this->m_key . '_consignment'][0])) $consignment = $custom[$this->m_key . '_consignment'][0];
 }
 
 //入力フィールドの表示
@@ -51,6 +52,12 @@ if(!empty($custom[$this->m_key . '_name']) || !empty($custom[$this->m_key . '_sp
         <th>スペース</th>
         <td>
             <input name="<?php echo $this->m_key;?>_space" class="<?php echo $this->m_key;?>_space" value="<?php if(isset($space)) echo $space; ?>" /> 
+        </td>
+    </tr>
+    <tr>
+        <th>委託</th>
+        <td>
+            <input type="checkbox" name="<?php echo $this->m_key;?>_consignment" class="<?php echo $this->m_key;?>_consignment" value="1" <?php if(isset($consignment)) echo 'checked="checked"'; ?> /> 
         </td>
     </tr>
 </table>
