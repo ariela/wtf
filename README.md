@@ -80,6 +80,14 @@ Wtf/Type以下にクラスを作成する。
 #### クラスの作成方法
 [例:Books カスタム投稿タイプモジュール](https://github.com/ariela/wtf/blob/master/Wtf/Type/Books.php)
 
+### カスタムフィールド ###
+カスタムフィールドを追加する為のモジュール
+
+Wtf/Field以下にクラスを作成する。
+
+#### クラスの作成方法
+[例:Events カスタムフィールドモジュール](https://github.com/ariela/wtf/blob/master/Wtf/Field/Events.php)
+
 ### ウィジェット領域 ###
 ウィジェット領域を追加する為のモジュール
 
