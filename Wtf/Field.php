@@ -41,11 +41,11 @@ abstract class Wtf_Field implements Wtf_IModule
 
         $htmlid = $this->m_id . '_meta';
     
-        add_meta_box($htmlid, $this->m_title, array($this, 'panel'), $this->m_posttype, $this->m_context, $this->m_priority);
+        add_meta_box($htmlid, $this->m_title, array($this, 'displayPanel'), $this->m_posttype, $this->m_context, $this->m_priority);
         add_action('save_post', array($this, 'save'));
     }
     
-    public function panel () {}
+    public function displayPanel() {}
     
     public function save($post_id) {}
 }

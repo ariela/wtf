@@ -25,6 +25,12 @@
 class Wtf_Field_Events extends Wtf_Field
 {
     /**
+     * フィールド等に使用されるキープレフィックス
+     * @var string
+     */
+    protected $m_key = 'wtf_field_event';
+
+    /**
      * {@inheritDoc}
      */
     protected $m_id = 'events';
@@ -45,51 +51,17 @@ class Wtf_Field_Events extends Wtf_Field
      */
     protected $m_priority = 'high';
 
+    public function __construct()
+    {
+        add_filter( 'manage_posts_columns', array($this, 'manage_events_columns'));
+        add_action( 'manage_posts_custom_column', array($this, 'add_column'), 10, 2);
+    }
+
     /**
      * {@inheritDoc}
      */
-    public function panel() {
-        global $post;
-        $custom = get_post_custom($post->ID);
-        //メタキーがあったら
-        if(!empty($custom)) {
-            $event_start = $custom["event_start"][0];
-            $event_end = $custom["event_end"][0];
-            //日付だけ表示
-            $event_date = date("Y-m-d", strtotime($event_start));
-            //開始時間
-            $start_time =  date("H:i", strtotime($event_start));
-            //終了時間
-            $end_time =  date("H:i", strtotime($event_end));
-        }
-        echo '<input type="hidden" name="events-nonce" id="events-nonce" value="' . wp_create_nonce( 'events-nonce' ) . '" />';
-        
-        //入力フィールドの表示
-        ?>
-        <style type="text/css">
-        #event-meta table th {
-                text-align: left;
-                font-weight: normal;
-                padding-right: 10px;
-        }
-        </style>
-        <div id="event-meta">
-        <table>
-            <tr>
-                <th>日付</th>
-                <td><input name="event_date" class="event_date" id="datepicker" value="<?php if(isset ( $event_date)) echo $event_date; ?>" /></td>
-            </tr>
-            <tr>
-                <th>時間</th>
-                <td>
-                    <input name="start_time" class="start_time" value="<?php if(isset ( $start_time)) echo $start_time; ?>" /> ～
-                    <input name="end_time" class="end_time" value="<?php if(isset ( $end_time)) echo $end_time; ?>" />
-                </td>
-            </tr>
-        </table>
-        </div>
-    <?php
-
+    public function displayPanel() {
+        require_once dirname(dirname(__FILE__)) . '/panel/field-event.php';
     }
 
     /**
@@ -97,21 +69,21 @@ class Wtf_Field_Events extends Wtf_Field
      */
     public function save($post_id){
         global $post;
-        if (!isset($_POST['events-nonce'])) return $post_id;
-        if ( !wp_verify_nonce($_POST['events-nonce'], 'events-nonce' )) {
+        if (!isset($_POST[$this->m_key . '_nonce'])) return $post_id;
+        if ( !wp_verify_nonce($_POST[$this->m_key . '_nonce'], $this->m_key . '_nonce')) {
             return $post_id;
         }
-        if ( !current_user_can( 'edit_post', $post->ID )) {
+        if ( !current_user_can('edit_post', $post->ID )) {
             return $post_id;
         }
-        $temp_date = $_POST['event_date'];
-        $temp_stime = $_POST['start_time'];
-        $temp_etime = $_POST['end_time'];
+        $temp_date = $_POST[$this->m_key . '_date'];
+        $temp_stime = $_POST[$this->m_key . '_start_time'];
+        $temp_etime = $_POST[$this->m_key . '_end_time'];
         $event_start = date('Y-m-d H:i:s', strtotime($temp_date .' '. $temp_stime));
         $event_end = date('Y-m-d H:i:s', strtotime($temp_date .' '. $temp_etime));
         
-        update_post_meta($post->ID, 'event_start', $event_start);
-        update_post_meta($post->ID, 'event_end', $event_end);
+        update_post_meta($post->ID, $this->m_key . '_start', $event_start);
+        update_post_meta($post->ID, $this->m_key . '_end', $event_end);
     }
 
     /**
@@ -121,42 +93,42 @@ class Wtf_Field_Events extends Wtf_Field
     {
         return 'イベントに関するフィールドを追加します。';
     }
-}
-function manage_events_columns($columns) {
-	global $post_type;
-	if( 'events' == $post_type ) {
-		$columns['event_date'] = 'イベント日付';
-		$columns['event_time'] = 'イベント時間';
-		$columns['ecategory'] = 'カテゴリー';
-	}
-	return $columns;
-}
-function add_column($column_name, $post_id) {
-	//日付表示
-	if( $column_name == 'event_date' ) {
-		echo date('Y年m月d日', strtotime(get_post_meta($post_id, 'event_start', true)));
-	}
-	//時間表示
-	if( $column_name == 'event_time' ) {
-		//開始時間
-		$start_time =  date('H:i', strtotime(get_post_meta($post_id, 'event_start', true)));
-		//終了時間
-		$end_time =  date('H:i', strtotime(get_post_meta($post_id, 'event_end', true)));
-		echo $start_time . '～' . $end_time;
-	}
-	//カテゴリー表示
-	if( $column_name == 'ecategory' ) {
-		$terms = get_the_terms($post_id, 'events');
-		if ($terms !== false) {
-    		foreach ($terms as $key => $value) {
-    			echo attribute_escape($value->name);
-    			//最後以外は「,」を
-    			if (end(array_keys($terms)) != $key) {
-    				echo ', ';
-    			}
-    		}
+    
+    public function manage_events_columns($columns) {
+        global $post_type;
+        if( 'events' == $post_type ) {
+            $columns[$this->m_key . '_date'] = 'イベント日付';
+            $columns[$this->m_key . '_time'] = 'イベント時間';
+            $columns[$this->m_key . '_category'] = 'カテゴリー';
         }
-	}
+        return $columns;
+    }
+    
+    public function add_column($column_name, $post_id) {
+        //日付表示
+        if( $column_name == $this->m_key . '_date' ) {
+            echo date('Y年m月d日', strtotime(get_post_meta($post_id, $this->m_key . '_start', true)));
+        }
+        //時間表示
+        if( $column_name == $this->m_key . '_time' ) {
+            //開始時間
+            $start_time =  date('H:i', strtotime(get_post_meta($post_id, $this->m_key . '_start', true)));
+            //終了時間
+            $end_time =  date('H:i', strtotime(get_post_meta($post_id, $this->m_key . '_end', true)));
+            echo $start_time . '～' . $end_time;
+        }
+        //カテゴリー表示
+        if( $column_name == $this->m_key . '_category' ) {
+            $terms = get_the_terms($post_id, 'events');
+            if ($terms !== false) {
+                foreach ($terms as $key => $value) {
+                    echo attribute_escape($value->name);
+                    //最後以外は「,」を
+                    if (end(array_keys($terms)) != $key) {
+                        echo ', ';
+                    }
+                }
+            }
+        }
+    }
 }
-add_filter( 'manage_posts_columns', 'manage_events_columns' );
-add_action( 'manage_posts_custom_column', 'add_column', 10, 2 );
